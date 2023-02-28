@@ -1,5 +1,4 @@
 from time import sleep
-from Pop3 import Pop3EmailDownloader
 from imap import ImapEmailDownloader
 
 

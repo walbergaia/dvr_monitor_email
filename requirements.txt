@@ -1,4 +1,3 @@
-git+https://github.com/jpype-project/jpype.git
-git+https://github.com/baztian/jaydebeapi.git
-cx-Oracle==8.3.0
-
+pytelegrambotapi
+opencv-python
+numpy
