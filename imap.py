@@ -18,7 +18,7 @@ class ImapEmailDownloader:
         self.connection.login(self.username, self.password)
         self.connection.select()
 
-    def download_attachments_from_sender(self, sender, save_directory):
+    def download_attachments_from_sender(self, sender):
         self.connect()
         _, messages = self.connection.search(None, f'FROM "{sender}"')
         for message_number in messages[0].split():
@@ -31,7 +31,6 @@ class ImapEmailDownloader:
                     continue
                 filename = part.get_filename()
                 if filename is not None:
-                    filepath = os.path.join(save_directory, filename)
                     buffered = part.get_payload(decode=True)
                     if (human_detector_ia.detect_human(filename, buffered)):
                         telegram.send_dvrimage(buffered)

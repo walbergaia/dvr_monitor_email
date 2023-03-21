@@ -1,11 +1,14 @@
+import json
 from time import sleep
 from imap import ImapEmailDownloader
 
-
-#downloader = Pop3EmailDownloader('pop.gmail.com', 995, 'dvrnotificacaoimagem@gmail.com', 'Gaia1979gm@')
-#downloader.download_attachments_from_sender('gaialber@gmail.com', 'email_received')
+# Lendo as configurações a partir do arquivo JSON
+with open('configdetector.json', 'r') as f:
+    config = json.load(f)
 
 while True:
-    downloader = ImapEmailDownloader('imap.gmail.com', 993, 'dvrnotificacaoimagem@gmail.com', 'hureajgcekarpytx')
-    downloader.download_attachments_from_sender('gaia.walber@gmail.com', 'email_received')
-    sleep(120)
+    # Usando as configurações lidas do arquivo JSON
+    email_config = config['email']
+    downloader = ImapEmailDownloader(email_config['server'], email_config['port'], email_config['username'], email_config['password'])
+    downloader.download_attachments_from_sender(email_config['sender'])
+    sleep(email_config['interval'])
